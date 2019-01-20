@@ -38,8 +38,8 @@ typedef struct
 	float color[3];
 } Vertex;
 
-Vertex vertex[6];
-GLubyte triangles[6];
+Vertex vertex[36];
+GLubyte triangles[36];
 
 /* Variable to hold the VBO identifier */
 GLuint vbo[1];
@@ -197,28 +197,28 @@ void Game::initialize()
 	vertex[35].coordinate[1] = -0.5f;
 	vertex[35].coordinate[2] = 0.0f;
 
-	vertex[0].color[0] = 0.0f;
+	vertex[0].color[0] = 0.1f;
 	vertex[0].color[1] = 1.0f;
 	vertex[0].color[2] = 0.0f;
 
-	vertex[1].color[0] = 0.0f;
+	vertex[1].color[0] = 0.1f;
 	vertex[1].color[1] = 1.0f;
 	vertex[1].color[2] = 0.0f;
 
-	vertex[2].color[0] = 0.0f;
+	vertex[2].color[0] = 0.1f;
 	vertex[2].color[1] = 1.0f;
 	vertex[2].color[2] = 0.0f;
 
-	vertex[3].color[0] = 1.0f;
-	vertex[3].color[1] = 0.0f;
+	vertex[3].color[0] = 0.1f;
+	vertex[3].color[1] = 1.0f;
 	vertex[3].color[2] = 0.0f;
 
-	vertex[4].color[0] = 1.0f;
-	vertex[4].color[1] = 0.0f;
+	vertex[4].color[0] = 0.1f;
+	vertex[4].color[1] = 1.0f;
 	vertex[4].color[2] = 0.0f;
 
-	vertex[5].color[0] = 1.0f;
-	vertex[5].color[1] = 0.0f;
+	vertex[5].color[0] = 0.1f;
+	vertex[5].color[1] = 1.0f;
 	vertex[5].color[2] = 0.0f;
 
 	vertex[6].color[0] = 0.0f;
@@ -373,7 +373,7 @@ void Game::initialize()
 void Game::update()
 {
 	elapsed = clock.getElapsedTime();
-
+	glRotatef(0.01f, 1.0f, 1.0f, 1.0f);
 	if (elapsed.asSeconds() >= 1.0f)
 	{
 		clock.restart();
