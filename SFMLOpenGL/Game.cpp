@@ -36,10 +36,10 @@ typedef struct
 {
 	float coordinate[3];
 	float color[3];
-} MyVertex;
+} NewVertex;
 
-MyVertex vertex[36];
-MyVertex initVertex[36];
+NewVertex vertex[36];
+NewVertex initVertex[36];
 GLubyte triangles[36];
 
 /* Variable to hold the VBO identifier */
@@ -369,12 +369,12 @@ void Game::initialize()
 	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 
 	/* Upload vertex data to GPU */
-	glBufferData(GL_ARRAY_BUFFER, sizeof(MyVertex) * 36, vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(NewVertex) * 36, vertex, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glGenBuffers(1, &index);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(MyVertex) * 36, triangles, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(NewVertex) * 36, triangles, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
@@ -449,7 +449,7 @@ void Game::update()
 
 		vertex[i].coordinate[0] = tempVec.x;
 		vertex[i].coordinate[1] = tempVec.y;
-		vertex[i].coordinate[2] = tempVec.x;
+		vertex[i].coordinate[2] = tempVec.z;
 	}
 
 	cout << "Update up" << endl;
@@ -468,17 +468,17 @@ void Game::render()
 
 	/*	As the data positions will be updated by the this program on the
 		CPU bind the updated data to the GPU for drawing	*/
-	glBufferData(GL_ARRAY_BUFFER, sizeof(MyVertex) * 36, vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(NewVertex) * 36, vertex, GL_STATIC_DRAW);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 
 
-	glColorPointer(3, GL_FLOAT, sizeof(MyVertex), (char*)NULL + 12);
+	glColorPointer(3, GL_FLOAT, sizeof(NewVertex), (char*)NULL + 12);
 
 	/*	Draw Triangle from VBO	(set where to start from as VBO can contain 
 		model compoents that are and are not to be drawn )	*/
-	glVertexPointer(3, GL_FLOAT, sizeof(MyVertex), (char*)NULL + 0);
+	glVertexPointer(3, GL_FLOAT, sizeof(NewVertex), (char*)NULL + 0);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, (char*)NULL + 0);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
